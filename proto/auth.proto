@@ -1,0 +1,18 @@
+syntax = "proto3";
+option go_package = "./warehousepb";
+
+import "models.proto";
+
+message AuthRequest {
+  string token = 1;
+  int64 purpose = 2;
+}
+
+message AuthResponse {
+  User user = 1;
+  int64 number = 2;
+}
+
+service Auth {
+  rpc Authenticate(AuthRequest) returns (AuthResponse);
+}
