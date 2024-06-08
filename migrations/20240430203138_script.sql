@@ -4,7 +4,7 @@ SELECT 'up SQL query';
 -- +goose StatementEnd
 
 CREATE TABLE IF NOT EXISTS public.script (
-  id public.xid NOT NULL,
+  id public.xid NOT NULL DEFAULT xid(),
   name string NOT NULL,
   workflow JSON NOT NULL,
   body_presets JSON NOT NULL,

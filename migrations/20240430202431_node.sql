@@ -4,7 +4,7 @@ SELECT 'up SQL query';
 -- +goose StatementEnd
 
 CREATE TABLE IF NOT EXISTS public.nodes (
-  id public.xid NOT NULL,
+  id public.xid NOT NULL DEFAULT xid(),
   name VARCHAR(120) NOT NULL,
   url VARCHAR(255) NOT NULL,
   method VARCHAR(10) NOT NULL,
