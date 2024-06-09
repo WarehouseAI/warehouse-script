@@ -11,7 +11,8 @@ import (
 
 type (
 	Grpc struct {
-		Host     string
+		UserHost string
+		AuthHost string
 		Post     int
 		UserAddr string
 		AuthAddr string
@@ -152,10 +153,11 @@ func NewConfig(cfgPath string) (*Config, error) {
 			AccCookie:      v.GetDuration("acc_cookie"),
 		},
 		Grpc: Grpc{
-			Host:     v.GetString("grpc.host"),
+			UserHost: v.GetString("grpc.user_host"),
+			AuthHost: v.GetString("grpc.auth_host"),
 			Post:     v.GetInt("grpc.port"),
-			UserAddr: v.GetString("grpc.user_addr"),
 			AuthAddr: v.GetString("grpc.auth_addr"),
+			UserAddr: v.GetString("grpc.user_addr"),
 		},
 		Postgres: Postgres{
 			DSN:     pgSource,
