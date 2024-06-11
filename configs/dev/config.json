@@ -15,19 +15,22 @@
   },
   "locale": 3,
   "grpc": {
-    "host": "auth",
-    "port": 8010,
-    "user_addr": "user:8020"
+    "auth": {
+      "addr": "auth:8010"
+    },
+    "user": {
+      "addr": "user:8020"
+    }
   },
   "server": {
-    "port": 8001,
+    "port": 8003,
     "allowed_origins": [
       "http://localhost:3000",
       "https://warehouse-ai-frontend.vercel.app",
       "https://warehousai.com"
     ]
   },
-  "pgSource": "postgresql://auth:authpass@db-auth:5440/auth_db?sslmode=disable",
+  "pgSource": "postgresql://script:1234@db-script:5003/postgres?sslmode=disable",
   "rabbitmq": {
     "port": 5672,
     "user": "rmq",
