@@ -1,0 +1,190 @@
+swagger: '2.0'
+info:
+  title: Warehouse-Script
+  description: Сервис связанный с выполнение пользовательских скриптов
+  version: 0.0.1
+schemes:
+  - https
+host: warehousai.com
+basePath: /api/script
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /node/add:
+    post:
+      tags:
+        - Нода
+      description: Добавление новой ноды
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: req
+          schema:
+            $ref: '#/definitions/AddNodeRequest'
+      responses:
+        201:
+          description: Информация по новой ноде
+          schema:
+            $ref: '#/definitions/AddNodeResponse'
+        default:
+          $ref: '#/responses/default'
+
+  /script/create:
+    post:
+      tags:
+        - Сценарии
+      description: Создание сценария
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: req
+          schema:
+            $ref: '#/definitions/ScriptCreateRequest'
+      responses:
+        200:
+          description: Информация по новому скрипту
+          schema:
+            $ref: '#/definitions/ScriptCreateResponse'
+        default:
+          $ref: '#/responses/default'
+
+  /script/run:
+    post:
+      tags:
+        - Сценарии
+      description: Выполнение сценария
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: req
+          schema:
+            $ref: '#/definitions/ScriptRunRequest'
+      responses:
+        200:
+          description: Информация по новому скрипту
+          schema:
+            $ref: '#/definitions/ScriptRunResponse'
+        default:
+          $ref: '#/responses/default'
+
+definitions:
+  ErrorResponse:
+    type: object
+    description: Типовая ошибка
+    properties:
+      code:
+        type: integer
+        description: Код ошибки
+      error:
+        type: string
+        description: Сообщение ошибки
+
+  AddNodeRequest:
+    type: object
+    description: Добавление новой ноды
+    properties:
+      name:
+        type: string
+        description: Название
+      body:
+        type: object
+        description: Тело запроса
+      request_mime:
+        type: string
+        description: MIME-тип входящих данных
+      response_mime:
+        type: string
+        description: MIME-тип выходящих данных
+      url:
+        type: string
+        description: url для запроса при вызове ядра
+      method:
+        type: string
+        description: метод запроса
+      headers:
+        type: object
+        description: заголовки для запроса
+      response_direction:
+        type: string
+        description: путь до результата, который вернется пользователю или пойдет в следующую ноду
+      api_key:
+        type: string
+        description: апи ключ для вызовов
+
+  AddNodeResponse:
+    type: object
+    description: Добавление новой ноды
+    properties:
+      id:
+        type: string
+        description: айди созданной ноды
+      body:
+        type: object
+        description: Тело запроса
+      headers:
+        type: object
+        description: заголовки для запроса
+
+  ScriptCreateRequest:
+    type: object
+    description: Создание нового сценария
+    properties:
+      name:
+        type: string
+        description: Название скрипта
+      workflow:
+        type: object
+        description: описания шагов и сценариев внутри сценария
+      body_presets:
+        type: object
+        description: предустановки для нод (тело запроса)
+      header_presets:
+        type: object
+        description: предустановки для нод (заголовки)
+
+  ScriptCreateResponse:
+    type: object
+    description: Создание нового сценария
+    properties:
+      id:
+        type: string
+        description: Айди скрипта
+      name:
+        type: string
+        description: Название скрипта
+      body_presets:
+        type: object
+        description: предустановки для нод (тело запроса)
+      header_presets:
+        type: object
+        description: предустановки для нод (заголовки)
+
+  ScriptRunRequest:
+    type: object
+    description: Запрос на выполнение сценария
+    properties:
+      id:
+        type: string
+        description: Айди скрипта, который нужно выполнить
+      enter_data:
+        type: string
+        description: Начальный контекст (запрос) пользователя
+
+  ScriptRunResponse:
+    type: object
+    description: Результат выполнения сценария
+    properties:
+      result:
+        type: string
+        description: Результат выполнения сценария
+
+responses:
+  default:
+    description: Error
+    schema:
+      $ref: '#/definitions/ErrorResponse'

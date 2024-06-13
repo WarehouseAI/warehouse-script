@@ -21,3 +21,10 @@ setup.extensions:
 	docker exec db-ext-setup /bin/sh -c "apk --update add postgresql-client && sh setupxid.sh" ;\
 	docker stop db-ext-setup ;\
 	docker rm db-ext-setup
+
+swagger.start:
+	docker run --restart unless-stopped -d --name script-swagger -p 9904:8080 -e SWAGGER_JSON=/specs/swagger.yaml -v $(shell pwd)/:/specs swaggerapi/swagger-ui
+
+swagger.stop:
+	docker stop auth-swagger
+	docker rm auth-swagger

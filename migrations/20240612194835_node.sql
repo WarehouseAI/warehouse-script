@@ -3,7 +3,7 @@
 SELECT 'up SQL query';
 -- +goose StatementEnd
 
-CREATE TABLE IF NOT EXISTS public.nodes (
+CREATE TABLE public.nodes (
   id public.xid NOT NULL DEFAULT xid(),
   name VARCHAR(120) NOT NULL,
   url VARCHAR(255) NOT NULL,
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS public.nodes (
   request_mime VARCHAR(50) NOT NULL,
   response_mime VARCHAR(50) NOT NULL,
   response_direction TEXT NOT NULL,
-  api_key VARCHAR(255) NOT NULL,
-)
+  api_key VARCHAR(255) NOT NULL
+);
 ALTER TABLE public.nodes
 ADD CONSTRAINT node_pkey PRIMARY KEY (id, name);
 

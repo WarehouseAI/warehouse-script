@@ -65,7 +65,7 @@ func NewAppServer(
 	nodeEndpoints internalHttp.Handler,
 ) (Server, error) {
 	var err error
-	listener, err := net.Listen("tcp", fmt.Sprintf("%v", cfg.Port))
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%v", cfg.Port))
 	if err != nil {
 		return nil, fmt.Errorf("cannot listen app port: %w", err)
 	}

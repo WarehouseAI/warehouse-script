@@ -30,7 +30,7 @@
       "https://warehousai.com"
     ]
   },
-  "pgSource": "postgresql://script:1234@db-script:5003/postgres?sslmode=disable",
+  "pgSource": "postgresql://script:1234@db-script:5432/postgres?sslmode=disable",
   "rabbitmq": {
     "port": 5672,
     "user": "rmq",
